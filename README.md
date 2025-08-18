@@ -46,6 +46,13 @@ An Arduino Project that utilizes the use of Ethernet Shield, Load Cell, NFC Modu
   - DT  --> 2
   - SCK --> 3
   - VCC --> 5V
+
+  **Servo**
+  - GND --> GND
+  - VCC --> 3.3V
+  - SIGNAL PIN --> 11
+  [!TIP]
+  You can configure your own pins for DT, SCK and Servo signal pin by configuring the code
   
   
   ### Step 5: Upload The Code
