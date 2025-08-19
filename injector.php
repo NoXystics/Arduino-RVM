@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_GET["uid"])) {
-   $temperature = $_GET["uid"]; // get temperature value from HTTP GET
+   $temperature = $_GET["uid"]; // get uid value from HTTP GET
 
    $servername = "localhost";
    $username = "Arduino";
