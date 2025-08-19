@@ -12,7 +12,8 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 PN532_I2C pn532i2c(Wire);
 PN532 nfc(pn532i2c);
 EthernetClient client;
-Servo servo;
+Servo servo1;
+Servo servo2;
 
 const int HX711_dout = 2;
 const int HX711_sck = 3;
@@ -43,7 +44,6 @@ void setup() {
 
   if (Ethernet.begin(mac) == 0) {
     Serial.println("Failed to obtain an IP address using DHCP");
-    while(true);
   }
 
 
@@ -67,9 +67,11 @@ void setup() {
   
   nfc.SAMConfig();
 
-  // Servo setup
-  servo.attach(11);
-  servo.write(0);
+
+  // servo1 setup
+  servo1.attach(11);
+  servo2.attach(10);
+  servo1.write(0);
 
 
   // Load Cell Setup
@@ -101,16 +103,20 @@ void loop() {
     
 
       if ( weight >= 25) {
+        servo1.write(180);
         for ( int e = 0 ; e < 10 ; e++ ) {
           for ( int i = 0 ; i <= 3 ; i++ ) {
-            servo.write(servo.read()+45);
             lcd.setCursor(0, 0);
             lcd.print("Proccessing trash...");
             lcd.setCursor(0, 1);
             lcd.print("Please wait...");
             delay(200);
           }
+          servo2.write(45);
+          delay(500);
         }
+        servo1.write(0);
+        servo2.write(0);
 
         while ( weight >= 25 ) {
           points += 10;
