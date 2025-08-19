@@ -7,7 +7,8 @@ An Arduino Project that utilizes the use of Ethernet Shield, Load Cell, NFC Modu
   - Liquid Crystal LCD
   - PN532 NFC Module
   - Load Cell & HX711 Amplifier
-  - Main Structure
+  - Breadboard
+  - Machine Main Structure/Body
 
 ## Libraries
   - [Elechouse PN532](https://github.com/elechouse/PN532)
