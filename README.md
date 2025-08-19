@@ -1,8 +1,8 @@
 # **RVM**
-An Arduino Project that utilizes the use of Ethernet Shield, Load Cell, NFC Module, Servo, LCD and mySQL database to rewards user with digital points that can be used as a currency. 
+An Arduino Project that utilizes the use of Ethernet Shield, Load Cell, NFC Module, Servo, LCD and mySQL database to rewards user with digital points that can be used as a currency.
 
 ## Material
-  - **Arduino UNO**
+  - Arduino UNO
   - Ethernet Shield
   - Liquid Crystal LCD
   - PN532 NFC Module
