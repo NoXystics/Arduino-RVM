@@ -23,7 +23,41 @@ An Arduino Project that utilizes the use of Ethernet Shield, Load Cell, NFC Modu
   <img width="832" height="540" alt="image" src="https://github.com/user-attachments/assets/ca79b689-6a3b-40cb-bbc8-a2688efdc8c6" />
 
   ### Step 2: Place PHP File in HTDOCS Folder
-  Download and place the PHP file inside C:\xampp\htdocs\
+  Download or copy and place the injector.php file inside C:\XAMPP\htdocs\
+  
+  ```
+  <?php
+  
+  if(isset($_GET["uid"])) {
+     $temperature = $_GET["uid"]; // get uid value from HTTP GET
+  
+     $servername = "localhost";
+     $username = "Arduino";
+     $password = "ArduinoGetStarted.com";
+     $dbname = "db_arduino";
+  
+     // Create connection
+     $conn = new mysqli($servername, $username, $password, $dbname);
+     // Check connection
+     if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+     }
+  
+     $sql = "INSERT INTO tbl_temp (uid_value, name, points) VALUES ($uid, name, points)";
+  
+     if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+     } else {
+        echo "Error: " . $sql . " => " . $conn->error;
+     }
+  
+     $conn->close();
+  } else {
+     echo "Points is not set";
+  }
+  
+  ?>
+  ```
 
   ### Step 3: Create Database
   Create the database for storing the points data for each user
