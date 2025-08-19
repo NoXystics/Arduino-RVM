@@ -89,7 +89,7 @@ RVM works by weighing the object put by user and calculate amount of points will
 
   **Servo**
   - GND --> GND
-  - VCC --> 3.3V
+  - VCC --> 5V
   - SIGNAL PIN --> 11
 
   **Servo**
@@ -102,7 +102,8 @@ RVM works by weighing the object put by user and calculate amount of points will
   
   ### Step 5: Upload The Code
   Install required libraries and copy the code to Arduino IDE and upload it to your Arduino UNO
-  <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/a44f6caa-edea-4df0-95a6-552b1ef08156" />
+  <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/57b6d31c-b713-46e8-b04c-c0bfe888e7e3" />
+
 
   ## License 
 
