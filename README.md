@@ -15,14 +15,17 @@ An Arduino Project that utilizes the use of Ethernet Shield, Load Cell, NFC Modu
   - [LiquidCrystal_I2C](https://github.com/NoXystics/Arduino-RVM/edit/main/README.md)
 
 ## How it works
-  RVM works by weighing the object put by user and calculate amount of points will be rewarded using that data. After getting the amount of point that will be rewarded RVM will wait until user tap an NFC Card and write the amount of points the user have then sent the newest data to the mySQL database through HTTP Request using the Ethernet Shield. 
+RVM works by weighing the object put by user and calculate amount of points will be rewarded using that data. After getting the amount of point that will be rewarded RVM will wait until user tap an NFC Card and write the amount of points the user have then sent the newest data to the mySQL database through HTTP Request using the Ethernet Shield. 
 
 ## Setup
   ### Step 1: Install XAMPP
-  Install and open XAMPP control panel to enable the mySQL and web server
+  Install and open XAMPP control panel to enable mySQL and web server
   <img width="832" height="540" alt="image" src="https://github.com/user-attachments/assets/ca79b689-6a3b-40cb-bbc8-a2688efdc8c6" />
 
-  ### Step 2: Place PHP File in HTDOCS Folder
+  ### Step 2: Create Database
+  Create the database for storing the points data for each user and then create a mySQL account that can be accessed from localhost only
+
+  ### Step 3: Place PHP File in HTDOCS Folder
   Download or copy and place the injector.php file inside C:\XAMPP\htdocs\
   
   ```
@@ -32,8 +35,8 @@ An Arduino Project that utilizes the use of Ethernet Shield, Load Cell, NFC Modu
      $temperature = $_GET["uid"]; // get uid value from HTTP GET
   
      $servername = "localhost";
-     $username = "Arduino";
-     $password = "ArduinoGetStarted.com";
+     $username = "Arduino";                       // Change this to match your mySQL account
+     $password = "ArduinoGetStarted.com";         // This too
      $dbname = "db_arduino";
   
      // Create connection
@@ -59,12 +62,9 @@ An Arduino Project that utilizes the use of Ethernet Shield, Load Cell, NFC Modu
   ?>
   ```
 
-  ### Step 3: Create Database
-  Create the database for storing the points data for each user
 
   > [!IMPORTANT]
-  > It's very recommended to create a mySQL user account that can connect to your mySQL\
-  > Database from localhost only!
+  > It's very recommended to create a mySQL user account that can connect to your mySQL database from localhost only for security reasons
 
   ### Step 4: Connect Pins
   Connect the pins: 
@@ -90,6 +90,11 @@ An Arduino Project that utilizes the use of Ethernet Shield, Load Cell, NFC Modu
   - GND --> GND
   - VCC --> 3.3V
   - SIGNAL PIN --> 11
+
+  **Servo**
+  - GND --> GND
+  - VCC --> 5V
+  - SIGNAL PIN --> 10
   > [!TIP]
   > You can configure your own pins for DT, SCK and Servo signal pin by configuring the code
   
