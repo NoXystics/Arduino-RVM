@@ -15,7 +15,7 @@ if(isset($_GET["uid"])) {
       die("Connection failed: " . $conn->connect_error);
    }
 
-   $sql = "INSERT INTO tbl_temp (uid_value, name, points) VALUES ($uid, name, points)";
+   $sql = "INSERT INTO rvm_table (uid_value, name, points) VALUES ($uid, name, points)";
 
    if ($conn->query($sql) === TRUE) {
       echo "New record created successfully";
