@@ -1,11 +1,13 @@
 <?php
 
 if(isset($_GET["uid"])) {
-   $temperature = $_GET["uid"]; // get uid value from HTTP GET
+   $uid = $_GET["uid"]; // get uid value from HTTP GET
+   $nama = $_GET["nama"]; // get nama value from HTTP GET
+   $points = $_GET["points"]; // get points value from HTTP GET
 
    $servername = "localhost";
    $username = "Arduino";
-   $password = "ArduinoGetStarted.com";
+   $password = "ArduinoPass";
    $dbname = "db_arduino";
 
    // Create connection
@@ -15,7 +17,7 @@ if(isset($_GET["uid"])) {
       die("Connection failed: " . $conn->connect_error);
    }
 
-   $sql = "INSERT INTO rvm_table (uid_value, name, points) VALUES ($uid, name, points)";
+   $sql = "INSERT INTO db_rvm (uid_value, name, points_value) VALUES ($uid, '$name', $points)";
 
    if ($conn->query($sql) === TRUE) {
       echo "New record created successfully";
@@ -25,7 +27,7 @@ if(isset($_GET["uid"])) {
 
    $conn->close();
 } else {
-   echo "Points is not set";
+   echo "Data is not set";
 }
 
 ?>
