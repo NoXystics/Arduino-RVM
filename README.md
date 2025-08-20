@@ -20,11 +20,11 @@ RVM works by weighing the object put by user and calculate amount of points will
 
 ## Setup
   ### Step 1: Install XAMPP
-  Install and open XAMPP control panel to enable mySQL and web server
+  Install XAMPP and open XAMPP control panel to enable mySQL and web server
   <img width="832" height="540" alt="image" src="https://github.com/user-attachments/assets/ca79b689-6a3b-40cb-bbc8-a2688efdc8c6" />
 
   ### Step 2: Create Database
-  Create the database for storing the points data for each user and then create a mySQL account that can be accessed from localhost only
+  Create a database named db_arduino for storing the points data for each user then create a table called rvm_table and then create a mySQL account      that can be accessed from localhost only so the table can be accessed by localhost only. 
 
   ### Step 3: Place PHP File in HTDOCS Folder
   Download or copy and place the injector.php file inside C:\XAMPP\htdocs\
@@ -47,7 +47,7 @@ RVM works by weighing the object put by user and calculate amount of points will
         die("Connection failed: " . $conn->connect_error);
      }
   
-     $sql = "INSERT INTO tbl_temp (uid_value, name, points) VALUES ($uid, name, points)";
+     $sql = "INSERT INTO rvm_table (uid_value, name, points) VALUES ($uid, name, points)";
   
      if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";
