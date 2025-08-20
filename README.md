@@ -1,5 +1,5 @@
 # **RVM**
-An Arduino Project that utilizes the use of Ethernet Shield, Load Cell, NFC Module, Servo, LCD and mySQL database to rewards user with digital points that can be used as a currency.
+An Arduino Project that utilizes the use of Ethernet Shield, Load Cell, NFC Module, Servos, LCD and mySQL database to rewards user with digital points that can be used as a currency.
 
 ## Material
   - Arduino UNO
@@ -21,23 +21,28 @@ RVM works by weighing the object put by user and calculate amount of points will
 ## Setup
   ### Step 1: Install XAMPP
   Install XAMPP and open XAMPP control panel to enable mySQL and web server
-  <img width="832" height="540" alt="image" src="https://github.com/user-attachments/assets/ca79b689-6a3b-40cb-bbc8-a2688efdc8c6" />
+  <img width="666" height="402" alt="XAMPP Control Panel v3 3 0     Compiled_ Apr 6th 2021   8_20_2025 6_53_11 PM" src="https://github.com/user-attachments/assets/aa389da0-c4d9-452e-b9c9-7b577c30e2d4" />
+
 
   ### Step 2: Create Database
-  Create a database named db_arduino for storing the points data for each user then create a table called rvm_table and then create a mySQL account      that can be accessed from localhost only so the table can be accessed by localhost only. 
+  Create a database named db_arduino for storing the points data for each user then create a table called rvm_table and then create a mySQL account that can be accessed from localhost only so the table can be accessed by localhost only. 
+  <img width="1904" height="920" alt="image" src="https://github.com/user-attachments/assets/25ecd8c2-7da1-4e56-8fc1-1c416972fed2" />
+
 
   ### Step 3: Place PHP File in HTDOCS Folder
   Download or copy and place the injector.php file inside C:\XAMPP\htdocs\
   
   ```
   <?php
-  
+
   if(isset($_GET["uid"])) {
-     $temperature = $_GET["uid"]; // get uid value from HTTP GET
+     $uid = $_GET["uid"]; // get uid value from HTTP GET
+     $nama = $_GET["nama"]; // get nama value from HTTP GET
+     $points = $_GET["points"]; // get points value from HTTP GET
   
      $servername = "localhost";
-     $username = "Arduino";                       // Change this to match your mySQL account
-     $password = "ArduinoGetStarted.com";         // This too
+     $username = "Arduino";
+     $password = "ArduinoPass";
      $dbname = "db_arduino";
   
      // Create connection
@@ -47,7 +52,7 @@ RVM works by weighing the object put by user and calculate amount of points will
         die("Connection failed: " . $conn->connect_error);
      }
   
-     $sql = "INSERT INTO rvm_table (uid_value, name, points) VALUES ($uid, name, points)";
+     $sql = "INSERT INTO db_rvm (uid_value, name, points_value) VALUES ($uid, '$name', $points)";
   
      if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";
@@ -57,15 +62,12 @@ RVM works by weighing the object put by user and calculate amount of points will
   
      $conn->close();
   } else {
-     echo "Points is not set";
+     echo "Data is not set";
   }
-  
+
   ?>
+
   ```
-
-
-  > [!IMPORTANT]
-  > It's very recommended to create a mySQL user account that can connect to your mySQL database from localhost only for security reasons
 
   ### Step 4: Connect Pins
   Connect the pins: 
