@@ -78,7 +78,8 @@ void setup() {
 
   // Load Cell Setup
   LoadCell.begin();
-  float calibrationValue = 465.82;
+  float calibrationValue;
+  EEPROM.get(calVal_eepromAdress, calibrationValue);
 
   unsigned long stabilizingtime = 5000;
   boolean _tare = true;
