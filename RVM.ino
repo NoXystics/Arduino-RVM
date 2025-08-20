@@ -30,7 +30,7 @@ byte mac[] = { 0xEC, 0xED, 0xBE, 0xEF, 0xFE, 0xDE };
 
 int    HTTP_PORT   = 80;
 String HTTP_METHOD = "GET";
-char   HOST_NAME[] = "192.168.0.103"; // change to your PC's IP address
+char   HOST_NAME[] = "172.10.20.228"; // change to your PC's IP address
 String PATH_NAME   = "/insert_points.php";
 
 String uidStr;
