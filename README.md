@@ -115,6 +115,7 @@ RVM works by weighing the object put by user and calculate amount of points will
   Install required libraries and copy the code to Arduino IDE and upload it to your Arduino UNO
   
   <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/57b6d31c-b713-46e8-b04c-c0bfe888e7e3" />
+  
 
   > [!IMPORTANT]
   > If fetching calibration value from EEPROM doesn't work on the main code you can set it yourself by adding "//" at the start of line 82 and change line 81 to  `float calibrationValue = <your calibration value>; `
