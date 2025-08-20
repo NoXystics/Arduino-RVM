@@ -9,9 +9,12 @@
 # include <EEPROM.h>
 
 LiquidCrystal_I2C lcd(0x27, 20, 4);
+
 PN532_I2C pn532i2c(Wire);
 PN532 nfc(pn532i2c);
+
 EthernetClient client;
+
 Servo servo1;
 Servo servo2;
 
@@ -33,7 +36,6 @@ String PATH_NAME   = "/insert_points.php";
 String uidStr;
 String nama;
 int points;
-
 boolean success;
 
 void setup() {
@@ -41,11 +43,9 @@ void setup() {
   Serial.begin(115200);
 
   // Ethernet Setup
-
   if (Ethernet.begin(mac) == 0) {
     Serial.println("Failed to obtain an IP address using DHCP");
   }
-
 
   // LCD Setup
   lcd.init();
@@ -72,17 +72,19 @@ void setup() {
   servo1.attach(11);
   servo2.attach(10);
   servo1.write(0);
+  servo2.write(0);
 
 
   // Load Cell Setup
   LoadCell.begin();
-  float calibrationValue;
-  EEPROM.get(calVal_eepromAdress, calibrationValue);
+  float calibrationValue = 465.82;
 
   unsigned long stabilizingtime = 5000;
   boolean _tare = true;
   LoadCell.start(stabilizingtime, _tare);
   LoadCell.setCalFactor(calibrationValue);
+
+  Serial.println("Init success");
 }
 
 void loop() {
@@ -100,21 +102,20 @@ void loop() {
       int weight = LoadCell.getData();
       newDataReady = 0;
       t = millis();
-    
+      Serial.println(String(weight));
 
-      if ( weight >= 25) {
+      if ( weight > 24) {
         servo1.write(180);
-        for ( int e = 0 ; e < 10 ; e++ ) {
-          for ( int i = 0 ; i <= 3 ; i++ ) {
-            lcd.setCursor(0, 0);
-            lcd.print("Proccessing trash...");
-            lcd.setCursor(0, 1);
-            lcd.print("Please wait...");
-            delay(200);
-          }
-          servo2.write(45);
-          delay(500);
-        }
+
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Proccessing trash...");
+        lcd.setCursor(0, 1);
+        lcd.print("Please wait...");
+        delay(200);
+
+        servo2.write(45);
+        delay(500);
         servo1.write(0);
         servo2.write(0);
 
@@ -126,21 +127,10 @@ void loop() {
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print("Please tap your card...");
+        success = false;
 
-        int tries = 0;
-        
-        while (!success || tries < 20) {
+        while (!success) {
           writeNFC();
-          delay(500);
-          tries += 1;
-        }
-
-        if (tries == 20) {
-          lcd.clear();
-          lcd.setCursor(0, 0);
-          lcd.print("Timed out waiting for card...");
-          lcd.setCursor(0, 1);
-          lcd.print("Please try again later.");
         }
 
         sentData();
@@ -171,12 +161,10 @@ void writeNFC() {
       uidStr = uidStr + "0x" + idStr + " ";
     }
 
-    Serial.println("Attempting to authenticate block 4 with key KEYA");
     uint8_t keya[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
 
     success = nfc.mifareclassic_AuthenticateBlock(uid, uidLength, 4, 0, keya);   
     if (success) {
-      Serial.println("Sector 1 (Blocks 4 to 7) authenticated");
       uint8_t data[16];
         
       success = nfc.mifareclassic_ReadDataBlock(4, data);
@@ -196,7 +184,6 @@ void writeNFC() {
 
       if (success) {
         nfc.PrintHexChar(data, 16);
-        Serial.println("");
 
         uint8_t newData[16];
         newData[0] = int(data[0]) + points;
@@ -207,6 +194,7 @@ void writeNFC() {
 
         memcpy(data, newData, sizeof data);
         success = nfc.mifareclassic_WriteDataBlock (5, data);
+        points = newData[0];
     
         if (success) {
           delay(5000);
