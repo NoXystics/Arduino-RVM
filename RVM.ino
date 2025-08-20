@@ -53,7 +53,9 @@ void setup() {
   lcd.clear();
 
   lcd.setCursor(0, 0);
-  lcd.print("Please insert trash below");
+  lcd.print("Please insert");
+  lcd.setCursor(0, 1);
+  lcd.print("trash below");
 
 
   // NFC Setup
@@ -77,8 +79,7 @@ void setup() {
 
   // Load Cell Setup
   LoadCell.begin();
-  float calibrationValue;
-  EEPROM.get(calVal_eepromAdress, calibrationValue);
+  float calibrationValue = 465.82;
 
   unsigned long stabilizingtime = 5000;
   boolean _tare = true;
@@ -99,47 +100,48 @@ void loop() {
 
   // get smoothed value from the dataset:
   if (newDataReady) {
-    if (millis() > t + serialPrintInterval) {
-      int weight = LoadCell.getData();
-      newDataReady = 0;
-      t = millis();
-      Serial.println(String(weight));
+    int weight = LoadCell.getData();
+    newDataReady = 0;
 
-      if ( weight > 24) {
-        servo1.write(180);
+    if ( weight > 24) {
+      
+      servo1.write(180);
 
-        lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("Proccessing trash...");
-        lcd.setCursor(0, 1);
-        lcd.print("Please wait...");
-        delay(200);
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Proccessing trash...");
+      lcd.setCursor(0, 1);
+      lcd.print("Please wait...");
 
-        servo2.write(45);
-        delay(500);
-        servo1.write(0);
-        servo2.write(0);
-
-        while ( weight >= 25 ) {
-          points += 10;
-          weight -= 25;
-        }
-
-        lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("Please tap your card...");
-        success = false;
-
-        while (!success) {
-          writeNFC();
-        }
-
-        sentData();
-
-        lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("Please insert trash below");
+      for ( i = 0; i < 50; i++) {
+        weight = LoadCell.getData();
+        delay(15);
       }
+
+      servo2.write(45);
+      delay(500);
+      servo1.write(0);
+      servo2.write(0);
+
+      while ( weight >= 25 ) {
+        points += 10;
+        weight -= 25;
+      }
+
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Please tap your card...");
+      success = false;
+
+      while (!success) {
+        writeNFC();
+      }
+
+      sentData();
+
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Please insert trash below");
     }
   }
   
