@@ -3,7 +3,6 @@
 # include <Wire.h>
 # include <PN532_I2C.h>
 # include <PN532.h>
-# include <SPI.h>
 # include <Servo.h>
 # include <HX711_ADC.h>
 # include <EEPROM.h>
