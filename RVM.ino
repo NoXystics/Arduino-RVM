@@ -113,7 +113,7 @@ void loop() {
       lcd.setCursor(0, 1);
       lcd.print("Please wait...");
 
-      for ( i = 0; i < 50; i++) {
+      for ( int i = 0; i < 50; i++) {
         weight = LoadCell.getData();
         delay(15);
       }
