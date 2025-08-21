@@ -98,6 +98,7 @@ RVM works by weighing the object put by user and calculate amount of points will
   - GND --> GND
   - VCC --> 5V
   - SIGNAL PIN --> 10
+    
   > [!TIP]
   > You can configure your own pins for DT, SCK and Servo signal pin by configuring the code
 
@@ -118,7 +119,11 @@ RVM works by weighing the object put by user and calculate amount of points will
   
 
   > [!IMPORTANT]
-  > If fetching calibration value from EEPROM doesn't work on the main code you can set it yourself by adding "//" at the start of line 82 and change line 81 to  `float calibrationValue = <your calibration value>; `
+  > If fetching calibration value from EEPROM doesn't work on the main code you can set it yourself by changing line 81 & line 82 of the .INO code
+  > ```
+  > float calibration value = <int>;
+  > // EEPROM.get(calVal_eepromAdress, calibrationValue);
+  > ```
 
 
   ## License 
@@ -134,6 +139,5 @@ RVM works by weighing the object put by user and calculate amount of points will
   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
   copies of the Software, and to permit persons to whom the Software is
   furnished to do so, subject to the following conditions:
-
   ```
   
