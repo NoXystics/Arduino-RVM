@@ -93,7 +93,6 @@ void loop() {
   // put your main code here, to run repeatedly:
   
   static boolean newDataReady = 0;
-  const int serialPrintInterval = 0; //increase value to slow down serial print activity
 
   // check for new data/start next conversion:
   if (LoadCell.update()) newDataReady = true;
