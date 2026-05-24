@@ -1,3 +1,4 @@
+# include <Arduino.h>
 # include <Ethernet.h>
 # include <LiquidCrystal_I2C.h>
 # include <Wire.h>
