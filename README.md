@@ -13,7 +13,7 @@ An Arduino Project that utilizes the use of Ethernet Shield, Load Cell, NFC Modu
 ## Libraries
   - [Elechouse PN532](https://github.com/elechouse/PN532)
   - [HX711_ADC](https://github.com/olkal/HX711_ADC)
-  - [LiquidCrystal_I2C](https://github.com/NoXystics/Arduino-RVM/edit/main/README.md)
+  - [LiquidCrystal_I2C](https://github.com/johnrickman/LiquidCrystal_I2C/tree/master)
 
 ## How it works
 RVM works by weighing the object put by user and calculate amount of points will be rewarded using that data. After getting the amount of point that will be rewarded RVM will wait until user tap an NFC Card and write the amount of points the user have then sent the newest data to the mySQL database through HTTP Request using the Ethernet Shield. 
