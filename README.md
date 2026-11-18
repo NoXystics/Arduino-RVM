@@ -172,7 +172,7 @@ RVM works by weighing the object put by user and calculate amount of points will
   ```
   MIT License
 
-  Copyright (c) 2025 SanC
+  Copyright (c) 2026 SanC
   
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
